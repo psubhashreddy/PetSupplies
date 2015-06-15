@@ -1,0 +1,119 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<ui:composition template="/jsf/common/template.xhtml">
+	<ui:define name="body">
+		<h:form>
+			<div style="float: left;">
+				<h:link outcome="create" value="#{i18n.createLink}" />
+			</div>
+			<div class="searchUserPanel">
+				<h:messages globalOnly="true" errorStyle="color: red"
+					infoStyle="color: green" layout="table" />
+				<p:panel id="searchPnl" header="#{i18n.searchPanelTitle}"
+					toggleable="true" closable="false" toggleSpeed="500"
+					onCloseUpdate="growl" closeSpeed="2000" onToggleUpdate="growl"
+					widgetVar="panel" styleClass="appPanel">
+					<h:panelGrid columns="4" cellpadding="5">
+						<label>#{i18n.userName}</label>
+						<h:inputText label="#{i18n.userName}" id="lblUserName"
+							value="#{userController.user.userName}" required="false" />
+						<label>#{i18n.firstName}</label>
+						<h:inputText label="#{i18n.firstName}" id="lblFirstName"
+							value="#{userController.user.firstName}" required="false" />
+						<label>#{i18n.email}</label>
+						<h:inputText label="#{i18n.email}" id="lblEmail"
+							value="#{userController.user.email}" required="false" />
+						<label>#{i18n.phone}</label>
+						<h:inputText label="#{i18n.phone}" id="lblPhone"
+							value="#{userController.user.phone}" required="false" />
+						<div class="sbmtSearchButton">
+							<h:commandButton title="#{i18n.searchUserBtn}"
+								value="#{i18n.searchUserBtn}"
+								action="#{userController.searchUsersByCriteria()}" />
+						</div>
+					</h:panelGrid>
+				</p:panel>
+			</div>
+		</h:form>
+		<h:form>
+			<br />
+			<div class="listUserDetails">
+				<p:panel
+					header="Users List - #{userController.getUserList().size()} #{i18n.availUserEntries}"
+					toggleable="true" closable="true" toggleSpeed="500">
+					<p:dataTable id="users" value="#{userController.getUserList()}"
+						var="userObj">
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="#{i18n.userId}" />
+							</f:facet>
+							<h:outputText value="#{userObj.userId}" />
+						</p:column>
+						<!-- 			            <p:column>
+			                <f:facet name="header">
+			                    <h:outputText value="#{i18n.roleId}" />
+			                </f:facet>
+			                <h:outputText value="#{userObj.role.roleId}" />
+			            </p:column>
+ -->
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="#{i18n.userName}" />
+							</f:facet>
+							<h:outputText value="#{userObj.userName}" />
+						</p:column>
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="#{i18n.firstName}, #{i18n.lastName}" />
+							</f:facet>
+							<h:outputText value="#{userObj.firstName}, #{userObj.lastName}" />
+						</p:column>
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="#{i18n.address}" />
+							</f:facet>
+							<h:outputText
+								value="#{userObj.address},#{userObj.city},#{userObj.state},#{userObj.country}-#{userObj.postalCode}" />
+						</p:column>
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="#{i18n.phone}" />
+							</f:facet>
+							<h:outputText value="#{userObj.phone}" />
+						</p:column>
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="#{i18n.email}" />
+							</f:facet>
+							<h:outputText value="#{userObj.email}" />
+						</p:column>
+
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="#{i18n.editUserBtn}" />
+							</f:facet>
+							<h:link outcome="edit" value="#{i18n.editLink}"
+								includeViewParams="true">
+								<f:param name="userId" value="#{userObj.userId}"></f:param>
+							</h:link>
+						</p:column>
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="#{i18n.deleteUserBtn}" />
+							</f:facet>
+							<h:link outcome="delete" value="#{i18n.deleteLink}"
+								includeViewParams="true">
+								<f:param name="userId" value="#{userObj.userId}"></f:param>
+							</h:link>
+						</p:column>
+					</p:dataTable>
+				</p:panel>
+			</div>
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>

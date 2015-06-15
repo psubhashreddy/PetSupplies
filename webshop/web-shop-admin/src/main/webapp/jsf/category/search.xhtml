@@ -1,0 +1,97 @@
+<ui:composition template="/jsf/common/template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+	<ui:define name="title">
+		<h:outputText value="#{i18n.pageTitle}" />
+	</ui:define>
+	<ui:define name="heading">
+		<h:outputText value="#{i18n.pageHeading}" />
+	</ui:define>
+	<ui:define name="body">
+		<h:form>
+			<div style="float: left;">
+				<h:link outcome="create" value="#{i18n.createLink}" />
+			</div>
+			<div class="searchCategoryPanel">
+				<h:messages errorStyle="color: red" infoStyle="color: green"
+					layout="table" />
+				<p:panel id="searchPnl" header="#{i18n.searchPanelTitle}"
+					toggleable="true" closable="false" toggleSpeed="500"
+					onCloseUpdate="growl" closeSpeed="2000" onToggleUpdate="growl"
+					widgetVar="panel" styleClass="appPanel">
+					<h:panelGrid columns="5" cellpadding="5">
+
+						<label>#{i18n.categoryName}</label>
+						<h:inputText label="#{i18n.categoryName}" id="lblCategoryName"
+							value="#{categoryController.category.categoryName}"
+							required="false" />
+
+						<label>#{i18n.categoryDesc}</label>
+						<h:inputText label="#{i18n.categoryDesc}"
+							id="lblCatgeoryDescription"
+							value="#{categoryController.category.categoryDescription}"
+							required="false" />
+
+						<div class="sbmtButton">
+							<h:commandButton title="#{i18n.searchCategoryBtn}"
+								value="#{i18n.searchCategoryBtn}"
+								action="#{categoryController.searchCategoriesByCriteria()}" />
+						</div>
+					</h:panelGrid>
+				</p:panel>
+			</div>
+		</h:form>
+		<h:form>
+			<br />
+			<div class="listCategoryDetails">
+				<p:panel
+					header="Categories List - #{categoryController.categoryList.size()} #{i18n.availCategoryEntries}"
+					toggleable="true" closable="true" toggleSpeed="500">
+					<p:dataTable id="categories"
+						value="#{categoryController.categoryList}" var="catgeoryObj">
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="#{i18n.categoryId}" />
+							</f:facet>
+							<h:outputText value="#{catgeoryObj.categoryId}" />
+						</p:column>
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="#{i18n.categoryName}" />
+							</f:facet>
+							<h:outputText value="#{catgeoryObj.categoryName}" />
+						</p:column>
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="#{i18n.categoryDesc}" />
+							</f:facet>
+							<h:outputText value="#{catgeoryObj.categoryDescription}" />
+						</p:column>
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="#{i18n.editCategoryBtn}" />
+							</f:facet>
+							<h:link outcome="edit" value="#{i18n.editLink}"
+								includeViewParams="true">
+								<f:param name="categoryId" value="#{catgeoryObj.categoryId}"></f:param>
+							</h:link>
+						</p:column>
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="#{i18n.deletCategoryBtn}" />
+							</f:facet>
+							<h:link outcome="delete" value="#{i18n.deleteLink}"
+								includeViewParams="true">
+								<f:param name="categoryId" value="#{catgeoryObj.categoryId}"></f:param>
+							</h:link>
+
+						</p:column>
+					</p:dataTable>
+				</p:panel>
+			</div>
+		</h:form>
+	</ui:define>
+</ui:composition>

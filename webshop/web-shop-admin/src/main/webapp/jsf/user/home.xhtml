@@ -1,0 +1,85 @@
+<ui:composition template="/jsf/common/template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+	<ui:define name="title">
+		<h:outputText value="#{i18n.pageTitle}" />
+	</ui:define>
+	<ui:define name="heading">
+		<h:outputText value="#{i18n.pageHeading}" />
+	</ui:define>
+	<ui:define name="body">
+		<h:form>
+			<div class="mngPanel">
+				<p:panel id="createRolePnl" header="#{i18n.roleManagePanelTitle}"
+					toggleable="true" closable="false" toggleSpeed="500"
+					onCloseUpdate="growl" closeSpeed="2000" onToggleUpdate="growl"
+					widgetVar="panel">
+					<h:panelGrid columns="2" cellpadding="10">
+						<p>
+							<h:commandLink action="#{roleController.createRole}"
+								value="#{i18n.createRoleBtn}" />
+						</p>
+						<p>
+							<h:commandLink action="#{roleController.searchRole}"
+								value="#{i18n.searchRoleBtn}" />
+						</p>
+					</h:panelGrid>
+				</p:panel>
+			</div>
+			<div class="mngPanel">
+				<p:panel id="createUserPnl" header="#{i18n.userManagePanelTitle}"
+					toggleable="true" closable="false" toggleSpeed="500"
+					onCloseUpdate="growl" closeSpeed="2000" onToggleUpdate="growl"
+					widgetVar="panel">
+					<h:panelGrid columns="2" cellpadding="10">
+						<p>
+							<h:commandLink action="#{userController.createUser}"
+								value="#{i18n.createUserBtn}" />
+						</p>
+						<p>
+							<h:commandLink action="#{userController.searchUser}"
+								value="#{i18n.searchUserBtn}" />
+						</p>
+					</h:panelGrid>
+				</p:panel>
+			</div>
+			<div class="mngPanel">
+				<p:panel id="createCategoryPnl"
+					header="#{i18n.categoryManagePanelTitle}" toggleable="true"
+					closable="false" toggleSpeed="500" onCloseUpdate="growl"
+					closeSpeed="2000" onToggleUpdate="growl" widgetVar="panel">
+					<h:panelGrid columns="2" cellpadding="10">
+						<p>
+							<h:commandLink action="#{categoryController.createCategory}"
+								value="#{i18n.createCategoryBtn}" />
+						</p>
+						<p>
+							<h:commandLink action="#{categoryController.searchCategory}"
+								value="#{i18n.searchCategoryBtn}" />
+						</p>
+					</h:panelGrid>
+				</p:panel>
+			</div>
+			<div class="mngPanel">
+				<p:panel id="createProductPnl"
+					header="#{i18n.productManagePanelTitle}" toggleable="true"
+					closable="false" toggleSpeed="500" onCloseUpdate="growl"
+					closeSpeed="2000" onToggleUpdate="growl" widgetVar="panel">
+					<h:panelGrid columns="2" cellpadding="10">
+						<p>
+							<h:commandLink action="#{productController.createProduct}"
+								value="#{i18n.createProductBtn}" />
+						</p>
+						<p>
+							<h:commandLink action="#{productController.searchProduct}"
+								value="#{i18n.searchProductBtn}" />
+						</p>
+					</h:panelGrid>
+				</p:panel>
+			</div>
+		</h:form>
+	</ui:define>
+</ui:composition>

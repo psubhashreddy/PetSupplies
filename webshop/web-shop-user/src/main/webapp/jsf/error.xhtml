@@ -1,0 +1,35 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title><ui:insert name="title">#{i18n.pageTitle}</ui:insert></title>
+	<link rel="stylesheet" type="text/css" href="css/style.css" />
+</h:head>
+<h:body class="loginPage">
+	<div class="loginHeader">
+		<p>#{i18n.pageTitle}</p>
+		<hr />
+	</div>
+	<br />
+	<div class="loginPanelParent">
+		<div style="height: 100%; width: 100%; border: 1px solid grey;">
+			<p:panel id="errorPnl" header="#{i18n.errorPanelTitle}"
+				toggleable="true" closable="false" toggleSpeed="500"
+				onCloseUpdate="growl" closeSpeed="2000" onToggleUpdate="growl"
+				widgetVar="panel">
+				<p>Application encountered an irrecoverable error. Please
+					contact Administrator or Try Login after some time</p>
+			</p:panel>
+		</div>
+	</div>
+	<br />
+	<div class="loginFooter">
+		<hr />
+		<p>All rights reserved</p>
+	</div>
+</h:body>
+</html>

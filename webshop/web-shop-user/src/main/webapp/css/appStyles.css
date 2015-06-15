@@ -1,0 +1,197 @@
+.successMsg {
+	background-color: #D97C7C;
+	color: #A30000;
+	display: block;
+	padding: 5px;
+	font-size: 10px;
+}
+
+.errorMsg {
+	background-color: #D97C7C;
+	color: #A30000;
+	display: block;
+	padding: 5px;
+	font-size: 10px;
+}
+
+.app {
+	background-color: ghostwhite;
+}
+
+.appHeader {
+	padding-top: 0px;
+	text-align: center;
+	font-family: Georgia;
+	font-style: italic;
+	font-size: 35px;
+	text-shadow: 2px 2px #ff0000;
+}
+
+.loginMsg {
+	text-align: right;
+	font-family: cursive;
+	margin-right: 30px;
+	font-size: 15px;
+}
+
+.welcomeMsg {
+	margin-right: 10px;
+}
+
+.tempHeader {
+	height: 8%;
+	width: 100%;
+}
+
+.tempBody {
+	margin: 0px auto;
+	min-height: 50%;
+	height: 380px;
+	width: 100%;
+}
+
+.tempFooter {
+	height: 5%;
+	width: 100%
+}
+
+.mngPanel {
+	width: 30%;
+	margin-right: 10%;
+	margin-bottom: 5%;
+	float: left;
+}
+
+.clr {
+	clear: both;
+}
+
+.appFooter {
+	text-align: center;
+	font-family: Georgia;
+	font-style: italic;
+	font-size: 12px;
+}
+
+.sbmtButton {
+	margin-left: 12%;
+}
+
+.sbmtSearchButton {
+	margin-left: 30%;
+}
+
+.searchRolePanel {
+	right: 0;
+	left: 0;
+	margin: 0px auto;
+	width: 70%;
+	text-align: center;
+}
+
+.searchUserPanel {
+	right: 0;
+	left: 0;
+	margin: 0px auto;
+	margin-top: -35px;
+	width: 55%;
+	text-align: center;
+}
+
+.searchProductPanel {
+	right: 0;
+	left: 0;
+	margin: 0px auto;
+	margin-top: -40px;
+	width: 65%;
+	text-align: center;
+}
+
+.searchCategoryPanel {
+	right: 0;
+	left: 0;
+	margin: 0px auto;
+	margin-top: -40px;
+	width: 70%;
+	text-align: center;
+}
+
+.appPanel {
+	background-color: ghostwhite;
+}
+
+.fullWidth {
+	width: 100%;
+}
+
+.createRolePanel {
+	width: 40%;
+	margin-left: 400px;
+}
+
+.createUserPanel {
+	width: 90%;
+	margin-left: 70px;
+	overflow: auto;
+}
+
+.createProductPanel {
+	width: 70%;
+	margin-left: 200px;
+}
+
+.createCategoryPanel {
+	width: 70%;
+	margin-left: 200px;
+}
+
+.listRoleDetails {
+	width: 50%;
+	margin: 0px auto;
+	overflow: auto;
+	height: 200px;
+}
+
+.listUserDetails {
+	width: 95%;
+	margin: 0px auto;
+	overflow: auto;
+	height: 180px;
+}
+
+.listCategoryDetails {
+	width: 70%;
+	margin: 0px auto;
+	overflow: auto;
+	height: 220px;
+}
+
+.listProductDetails {
+	width: 80%;
+	margin: 0px auto;
+	overflow: auto;
+	height: 200px;
+}
+
+.dropDownWidth {
+	width: 220px;
+}
+
+.productSearchDiv {
+	width: 28%;
+	float: left;
+}
+
+.productListDiv {
+	width: 71%;
+	height: 340px;
+	float: right;
+}
+
+.dataTableDiv{
+	overflow-y: auto;
+	height: 300px;
+	width: 935px;
+	margin-left: -18px;
+	margin-top: -9px;	
+}

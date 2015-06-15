@@ -1,0 +1,55 @@
+.successMsg {
+	background-color: #D97C7C;
+	color: #A30000;
+	display: block;
+	padding: 5px;
+	font-size: 10px;
+}
+
+.errorMsg {
+	background-color: #D97C7C;
+	color: #A30000;
+	display: block;
+	padding: 5px;
+}
+
+.loginPage {
+	background-color: ghostwhite;
+}
+
+.loginHeader {
+	text-align: center;
+	font-family: Georgia;
+	font-style: italic;
+	font-size: 35px;
+	text-shadow: 2px 2px #ff0000;
+}
+
+.loginPanelParent {
+	height: 420px;
+}
+
+.loginPanelDiv {
+	right: 0;
+	left: 0;
+	margin: 0px auto;
+	min-height: 10%;
+	width: 35%;
+	text-align: center;
+	height: 50%;
+}
+
+.loginPanel {
+	background-color: ghostwhite;
+}
+
+.loginButton {
+	margin-left: 12%;
+}
+
+.loginFooter {
+	text-align: center;
+	font-family: Georgia;
+	font-style: italic;
+	font-size: 12px;
+}

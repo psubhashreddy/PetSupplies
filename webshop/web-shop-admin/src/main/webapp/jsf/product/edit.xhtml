@@ -1,0 +1,75 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<ui:composition template="/jsf/common/template.xhtml">
+	<ui:define name="title">
+		<h:outputText value="#{i18n.pageTitle}" />
+	</ui:define>
+	<ui:define name="heading">
+		<h:outputText value="#{i18n.pageHeading}" />
+	</ui:define>
+	<ui:define name="metadata">
+		<f:metadata>
+			<f:viewParam name="productId" value="#{productController.productId}" />
+			<f:event listener="#{productController.editView()}"
+				type="preRenderView"></f:event>
+		</f:metadata>
+	</ui:define>
+	<ui:define name="body">
+		<h:form>
+			<div style="float: left;">
+				<h:link outcome="search" value="#{i18n.searchLink}" />
+			</div>
+			<div class="createProductPanel">
+				<h:messages errorStyle="color: red" infoStyle="color: green"
+					layout="table" />
+				<p:panel id="updatePnl" header="#{i18n.updatePanelTitle}"
+					toggleable="true" closable="false" toggleSpeed="500"
+					onCloseUpdate="growl" closeSpeed="2000" onToggleUpdate="growl"
+					widgetVar="panel">
+
+					<h:panelGrid columns="4" cellpadding="10">
+
+						<label>#{i18n.productId}</label>
+						<h:inputText label="#{i18n.productId}" id="lblProductId"
+							value="#{productController.product.productId}" readonly="true" />
+
+						<label>#{i18n.productCode}</label>
+						<h:inputText label="#{i18n.productCode}" id="lblProductCode"
+							value="#{productController.product.productCode}" readonly="true" />
+
+						<label>#{i18n.productName}</label>
+						<h:inputText label="#{i18n.productName}" id="lblProductName"
+							value="#{productController.product.productName}" readonly="true" />
+
+
+						<label>#{i18n.productPrice}</label>
+						<h:inputText label="#{i18n.productPrice}" id="lblProductPrice"
+							value="#{productController.product.productPrice}" required="true" />
+
+						<label>#{i18n.productDesc}</label>
+						<h:inputText label="#{i18n.productDesc}" id="lblProductDesc"
+							value="#{productController.product.productDescription}"
+							required="false" />
+
+						<h:commandButton title="#{i18n.updateBtn}"
+							value="#{i18n.updateBtn}"
+							action="#{productController.updateProduct()}" />
+
+						<h:inputHidden value="#{productController.product.productId}" />
+						<h:inputHidden value="#{productController.product.productCode}" />
+						<h:inputHidden value="#{productController.product.productName}" />
+						<h:inputHidden
+							value="#{productController.product.orderDetailsOrderId}" />
+						<h:inputHidden value="#{productController.categoryId}" />
+
+					</h:panelGrid>
+				</p:panel>
+			</div>
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>

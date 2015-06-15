@@ -1,0 +1,25 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+
+	<div class="appHeader">
+		<p>#{i18n.pageTitle}</p>
+	</div>
+	<hr />
+	<div class="loginMsg">
+		<h:form>
+			<p>
+				<span class="welcomeMsg">Welcome #{userLoggedIn.userName} !</span> <span
+					class="welcomeMsg"><h:commandLink
+						action="#{navigationController.toHome()}" value="Home" /></span> <span
+					class="welcomeMsg"><h:commandLink
+						action="#{loginController.logout}" value="Logout" /></span>
+			</p>
+		</h:form>
+	</div>
+
+</ui:composition>
+

@@ -1,0 +1,53 @@
+<ui:composition template="/jsf/common/template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+	<ui:define name="title">
+		<h:outputText value="#{i18n.pageTitle}" />
+	</ui:define>
+	<ui:define name="heading">
+		<h:outputText value="#{i18n.pageHeading}" />
+	</ui:define>
+	<ui:define name="metadata">
+		<f:metadata>
+			<f:event listener="#{roleController.clearForm}" type="preRenderView"></f:event>
+		</f:metadata>
+	</ui:define>
+	<ui:define name="body">
+		<div class="fullWidth">
+			<div style="float: left;">
+				<h:link outcome="search" value="#{i18n.searchLink}" />
+			</div>
+			<div class="createRolePanel">
+				<h:form>
+					<h:messages errorStyle="color: red" infoStyle="color: green"
+						layout="table" />
+					<p:panel id="createPnl" header="#{i18n.createPanelTitle}"
+						toggleable="true" closable="false" toggleSpeed="500"
+						onCloseUpdate="growl" closeSpeed="2000" onToggleUpdate="growl"
+						widgetVar="panel">
+
+						<h:panelGrid columns="2" cellpadding="10">
+							<label>#{i18n.roleName}</label>
+							<h:inputText label="#{i18n.roleName}" id="lblRoleName"
+								value="#{roleController.role.roleName}" required="true"
+								requiredMessage="Role Name is Required" />
+
+							<label>#{i18n.roleDescription}</label>
+							<h:inputTextarea label="#{i18n.roleDescription}" id="lblRoleDesc"
+								cols="22" value="#{roleController.role.roleDesc}"
+								required="true" />
+							<div class="sbmtButton">
+								<h:commandButton title="#{i18n.createRoleBtn}"
+									value="#{i18n.createRoleBtn}"
+									action="#{roleController.createRole()}" />
+							</div>
+						</h:panelGrid>
+					</p:panel>
+				</h:form>
+			</div>
+		</div>
+	</ui:define>
+</ui:composition>

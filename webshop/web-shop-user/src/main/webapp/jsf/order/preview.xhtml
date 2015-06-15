@@ -1,0 +1,72 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<ui:composition template="/jsf/common/template.xhtml">
+	<ui:define name="title">
+		<h:outputText value="#{i18n.pageTitle}" />
+	</ui:define>
+	<ui:define name="heading">
+		<h:outputText value="#{i18n.pageHeading}" />
+	</ui:define>
+	<ui:define name="body">
+		<h:form>
+			<br />
+			<div class="listProductDetails">
+				<p:panel
+					header="Products List - #{shoppingController.orderVO.catList.size()} #{i18n.availProductEntries}"
+					toggleable="true" closable="true" toggleSpeed="500">
+					<p:dataTable id="category" value="#{shoppingController.orderVO.catList}"
+						var="categoryObj">
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="#{categoryObj.categoryName}" />
+							</f:facet>
+							<p:dataTable id="products" value="#{categoryObj.productList}" var="productObj">
+								<p:column>
+									<f:facet name="header">
+										<h:outputText value="#{i18n.productCode}" />
+									</f:facet>
+									<h:outputText value="#{productObj.productCode}" />
+								</p:column>
+								<p:column>
+									<f:facet name="header">
+										<h:outputText value="#{i18n.productName}" />
+									</f:facet>
+									<h:outputText value="#{productObj.productName}" />
+								</p:column>
+								<p:column>
+									<f:facet name="header">
+										<h:outputText value="#{i18n.productPrice}" />
+									</f:facet>
+									<h:outputText value="#{productObj.productPrice}" />
+								</p:column>
+								<p:column>
+									<f:facet name="header">
+										<h:outputText value="#{i18n.productDesc}" />
+									</f:facet>
+									<h:outputText value="#{productObj.productDesc}" />
+								</p:column>
+								<p:column>
+									<f:facet name="header">
+										<h:outputText value="#{i18n.productQuantity}" />
+									</f:facet>
+									<h:outputText value="#{productObj.quantity}" />
+								</p:column>
+								<p:column>
+									<f:facet name="header">
+										<h:outputText value="#{i18n.productTotalCost}" />
+									</f:facet>
+									<h:outputText value="#{productObj.totalAmount}" />
+								</p:column>
+							</p:dataTable>
+						</p:column>
+					</p:dataTable>
+				</p:panel>
+			</div>
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>

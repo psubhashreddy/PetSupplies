@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<ui:composition template="/jsf/common/template.xhtml">
+	<ui:define name="title">
+		<h:outputText value="#{i18n.pageTitle}" />
+	</ui:define>
+	<ui:define name="heading">
+		<h:outputText value="#{i18n.pageHeading}" />
+	</ui:define>
+	<ui:define name="metadata">
+		<f:metadata>
+			<f:event listener="#{categoryController.clearForm}"
+				type="preRenderView"></f:event>
+		</f:metadata>
+	</ui:define>
+	<ui:define name="body">
+		<div class="fullWidth">
+			<div style="float: left;">
+				<h:link outcome="search" value="#{i18n.searchLink}" />
+			</div>
+			<div class="createCategoryPanel">
+				<h:form>
+					<h:messages errorStyle="color: red" infoStyle="color: green"
+						layout="table" />
+					<p:panel id="createPnl" header="#{i18n.createPanelTitle}"
+						toggleable="true" closable="false" toggleSpeed="500"
+						onCloseUpdate="growl" closeSpeed="2000" onToggleUpdate="growl"
+						widgetVar="panel">
+						<h:panelGrid columns="4" cellpadding="10">
+
+							<label>#{i18n.categoryName}</label>
+							<h:inputText label="#{i18n.categoryName}" id="lblCategoryName"
+								value="#{categoryController.category.categoryName}"
+								required="true" />
+
+							<label>#{i18n.categoryDesc}</label>
+							<h:inputTextarea label="#{i18n.categoryDesc}" id="lblAddress"
+								value="#{categoryController.category.categoryDescription}"
+								required="true" cols="22" />
+
+							<div class="sbmtButton">
+								<h:commandButton title="#{i18n.createCategoryBtn}"
+									value="#{i18n.createCategoryBtn}"
+									action="#{categoryController.createCategory()}" />
+							</div>
+						</h:panelGrid>
+					</p:panel>
+				</h:form>
+			</div>
+		</div>
+	</ui:define>
+</ui:composition>
+</html>

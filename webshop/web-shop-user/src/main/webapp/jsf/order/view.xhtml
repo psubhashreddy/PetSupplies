@@ -1,0 +1,103 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<ui:composition template="/jsf/common/template.xhtml">
+	<ui:define name="title">
+		<h:outputText value="#{i18n.pageTitle}" />
+	</ui:define>
+	<ui:define name="heading">
+		<h:outputText value="#{i18n.pageHeading}" />
+	</ui:define>
+	<ui:define name="metadata">
+		<f:metadata>
+			<f:event listener="#{shoppingController.showAllProducts()}"
+				type="preRenderView"></f:event>
+		</f:metadata>
+	</ui:define>
+	<ui:define name="body">
+		<div style="margin-top: -20px; height: 100%;">
+			<h:form>
+				<div class="productSearchDiv">
+					<h:messages errorStyle="color: red" infoStyle="color: green"
+						layout="table" />
+					<p:panel id="viewPnl" header="#{i18n.searchPanelTitle}"
+						toggleable="true" closable="false" toggleSpeed="500"
+						onCloseUpdate="growl" closeSpeed="2000" onToggleUpdate="growl"
+						widgetVar="panel" styleClass="appPanel">
+						<h:panelGrid columns="2" cellpadding="4">
+
+							<label>#{i18n.category}</label>
+							<h:selectOneMenu value="#{shoppingController.categoryId}" styleClass="dropDownWidth" >
+								<f:selectItem itemLabel="Select" />
+								<f:selectItems value="#{shoppingController.categoryList}"
+									var="category" itemValue="#{category.categoryId}"
+									itemLabel="#{category.categoryName}" />
+							</h:selectOneMenu>
+
+							<label>#{i18n.productDesc}</label>
+							<h:inputText label="#{i18n.productDesc}" id="lblProductDesc"
+								value="#{shoppingController.productDesc}" required="false" />
+
+							<div class="sbmtButton">
+								<h:commandButton title="#{i18n.searchProductsBtn}"
+									value="#{i18n.searchProductsBtn}"
+									action="#{shoppingController.searchProducts()}" />
+							</div>
+						</h:panelGrid>
+					</p:panel>
+				</div>
+			</h:form>
+			<h:form id="myform">
+				<div class="productListDiv">
+					<p:panel header="Product List"
+						toggleable="true" closable="true" toggleSpeed="500" style="height:340px;">
+						<div class="dataTableDiv">
+							<p:dataTable value="#{shoppingController.orderVO.catList}" var="categoryObj" > 
+								<p:column>
+									<h:outputText value="#{categoryObj.categoryName}" />
+									<p:dataTable value="#{categoryObj.productList}" var="productObj">
+										<p:column>
+											<f:facet name="header">
+												<h:outputText value="#{i18n.productCode}" />
+											</f:facet>
+											<h:outputText value="#{productObj.productCode}" />
+										</p:column>								
+										<p:column>
+											<f:facet name="header">
+												<h:outputText value="#{i18n.productName}" />
+											</f:facet>
+											<h:outputText value="#{productObj.productName}" />
+										</p:column>								
+										<p:column style="width:100px;">
+											<f:facet name="header">
+												<h:outputText value="#{i18n.price}" />
+											</f:facet>
+											<h:outputText value="#{productObj.productPrice}" />
+										</p:column>								
+										<p:column>
+											<f:facet name="header">
+												<h:outputText value="#{i18n.productDesc}" />
+											</f:facet>
+											<h:outputText value="#{productObj.productDesc}" />
+										</p:column>								
+										<p:column style="width:100px;">
+											<f:facet name="header">
+												<h:outputText value="#{i18n.quantity}" />
+											</f:facet>
+											<p:inputText id="quantity" value="#{productObj.quantity}" style="width:100px;"/>
+										</p:column>								
+									</p:dataTable>
+								</p:column>
+							</p:dataTable>
+						</div>
+					</p:panel>
+				</div>
+<!-- 				<div><h:outputText value="Total Amount:" /><h:outputText id="model" value="#{shoppingController.orderVO.totalAmt}" /></div> -->
+			</h:form>
+		</div>
+	</ui:define>
+</ui:composition>
+</html>

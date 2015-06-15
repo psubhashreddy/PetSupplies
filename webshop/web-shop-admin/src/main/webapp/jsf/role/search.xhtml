@@ -1,0 +1,93 @@
+<ui:composition template="/jsf/common/template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+	<ui:define name="title">
+		<h:outputText value="#{i18n.pageTitle}" />
+	</ui:define>
+	<ui:define name="heading">
+		<h:outputText value="#{i18n.pageHeading}" />
+	</ui:define>
+	<ui:define name="body">
+		<h:form>
+			<div style="float: left;">
+				<h:link outcome="create" value="#{i18n.createLink}" />
+			</div>
+			<div class="searchRolePanel">
+				<h:messages errorStyle="color: red" infoStyle="color: green"
+					layout="table" />
+				<p:panel id="searchPnl" header="#{i18n.searchPanelTitle}"
+					toggleable="true" closable="false" toggleSpeed="500"
+					onCloseUpdate="growl" closeSpeed="2000" onToggleUpdate="growl"
+					widgetVar="panel" styleClass="appPanel">
+					<h:panelGrid columns="4" cellpadding="5">
+						<label>#{i18n.roleName}</label>
+						<h:inputText label="#{i18n.roleName}" id="lblRoleName"
+							value="#{roleController.role.roleName}" required="false" />
+						<label>#{i18n.roleDescription}</label>
+						<h:inputText label="#{i18n.roleDescription}"
+							id="lblRoleDescription" value="#{roleController.role.roleDesc}"
+							required="false" />
+						<div class="sbmtButton">
+							<h:commandButton title="#{i18n.searchRoleBtn}"
+								value="#{i18n.searchRoleBtn}"
+								action="#{roleController.searchRolesByCriteria()}" />
+						</div>
+
+					</h:panelGrid>
+				</p:panel>
+			</div>
+		</h:form>
+		<h:form>
+			<br />
+			<div class="listRoleDetails">
+				<p:panel
+					header="Roles List - #{roleController.getRoleList().size()} #{i18n.availRoleEntries}"
+					toggleable="true" closable="true" toggleSpeed="500">
+					<p:dataTable id="roles" value="#{roleController.getRoleList()}"
+						var="roleObj">
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="#{i18n.roleId}" />
+							</f:facet>
+							<h:outputText value="#{roleObj.roleId}" />
+						</p:column>
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="#{i18n.roleName}" />
+							</f:facet>
+							<h:outputText value="#{roleObj.roleName}" />
+						</p:column>
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="#{i18n.roleDescription}" />
+							</f:facet>
+							<h:outputText value="#{roleObj.roleDesc}" />
+						</p:column>
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="#{i18n.editRoleBtn}" />
+							</f:facet>
+							<h:link outcome="edit" value="#{i18n.editLink}"
+								includeViewParams="true">
+								<f:param name="roleId" value="#{roleObj.roleId}"></f:param>
+							</h:link>
+						</p:column>
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="#{i18n.deleteRoleBtn}" />
+							</f:facet>
+							<h:link outcome="delete" value="#{i18n.deleteLink}"
+								includeViewParams="true">
+								<f:param name="roleId" value="#{roleObj.roleId}"></f:param>
+							</h:link>
+
+						</p:column>
+					</p:dataTable>
+				</p:panel>
+			</div>
+		</h:form>
+	</ui:define>
+</ui:composition>

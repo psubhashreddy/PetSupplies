@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title><ui:insert name="title">#{i18n.pageTitle}</ui:insert></title>
+	<link rel="stylesheet" type="text/css" href="css/loginStyles.css" />
+</h:head>
+<h:body class="loginPage">
+	<div class="loginHeader">
+		<p>#{i18n.pageTitle}</p>
+		<hr />
+	</div>
+	<br />
+	<div style="float: left;">
+		<h:link outcome="register" value="#{i18n.registerLink}" />
+	</div>
+	<div class="loginPanelParent">
+		<div class="loginPanelDiv">
+			<h:messages errorStyle="color: red" infoStyle="color: green"
+				layout="table" />
+			<h:form>
+				<p:panel id="loginPnl" header="#{i18n.loginPanelTitle}"
+					toggleable="true" closable="false" toggleSpeed="500"
+					onCloseUpdate="growl" closeSpeed="2000" onToggleUpdate="growl"
+					widgetVar="panel" styleClass="loginPanel">
+					<h:panelGrid columns="2" cellpadding="10">
+						<label>#{i18n.userName}</label>
+						<h:inputText label="User Name" id="lblUserName"
+							value="#{loginController.userName}" required="true" />
+						<label>#{i18n.password}</label>
+						<h:inputSecret label="Password" id="lblPassword"
+							value="#{loginController.password}" required="true" />
+						<div class="loginButton">
+							<h:commandButton title="#{i18n.loginBtn}"
+								value="#{i18n.loginBtn}" action="#{loginController.login()}" />
+						</div>
+					</h:panelGrid>
+				</p:panel>
+			</h:form>
+		</div>
+	</div>
+	<br />
+	<div class="loginFooter">
+		<hr />
+		<p>All rights reserved</p>
+	</div>
+</h:body>
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<ui:composition template="/jsf/common/template.xhtml">
+	<ui:define name="title">
+		<h:outputText value="#{i18n.pageTitle}" />
+	</ui:define>
+	<ui:define name="heading">
+		<h:outputText value="#{i18n.pageHeading}" />
+	</ui:define>
+	<ui:define name="body">
+		<div class="fullWidth">
+			<div class="createUserPanel">
+				<h:form>
+					<h:messages errorStyle="color: red" infoStyle="color: green"
+						layout="table" />
+					<p:panel id="updatePnl" header="#{i18n.updateProfilePanel}"
+						toggleable="true" closable="false" toggleSpeed="500"
+						onCloseUpdate="growl" closeSpeed="2000" onToggleUpdate="growl"
+						widgetVar="panel">
+						<h:panelGrid columns="6" cellpadding="10">
+
+							<label>#{i18n.firstName}</label>
+							<h:inputText label="#{i18n.firstName}" id="lblFirstName"
+								value="#{userController.user.firstName}" required="true" />
+
+							<label>#{i18n.lastName}</label>
+							<h:inputText label="#{i18n.lastName}" id="lblLastName"
+								value="#{userController.user.lastName}" required="false" />
+
+							<label>#{i18n.userName}</label>
+							<h:inputText label="#{i18n.userName}" id="lblUserName"
+								value="#{userController.user.userName}" required="true"
+								readonly="true" />
+
+							<label>#{i18n.password}</label>
+							<h:inputText label="#{i18n.password}" id="lblPassword"
+								value="#{userController.user.password}" required="true" />
+
+							<label>#{i18n.phone}</label>
+							<h:inputText label="#{i18n.phone}" id="lblPhone"
+								value="#{userController.user.phone}" required="true"
+								readonly="true" />
+
+							<label>#{i18n.email}</label>
+							<h:inputText label="#{i18n.email}" id="lblEMail"
+								value="#{userController.user.email}" required="true"
+								readonly="true" />
+
+							<label>#{i18n.address}</label>
+							<h:inputTextarea label="#{i18n.address}" id="lblAddress"
+								value="#{userController.user.address}" required="false"
+								cols="22" />
+
+							<label>#{i18n.city}</label>
+							<h:inputText label="#{i18n.city}" id="lblCity"
+								value="#{userController.user.city}" required="false" />
+
+							<label>#{i18n.state}</label>
+							<h:inputText label="#{i18n.state}" id="lblState"
+								value="#{userController.user.state}" required="false" />
+
+							<label>#{i18n.country}</label>
+							<h:inputText label="#{i18n.country}" id="lblCountry"
+								value="#{userController.user.country}" required="false" />
+
+							<label>#{i18n.postalCode}</label>
+							<h:inputText label="#{i18n.postalCode}" id="lblPostalCode"
+								value="#{userController.user.postalCode}" required="false" />
+
+							<div class="sbmtButton">
+								<h:commandButton title="#{i18n.updateUserBtn}"
+									value="#{i18n.updateUserBtn}"
+									action="#{userController.updateUser()}" />
+							</div>
+							<h:inputHidden value="#{userController.user.userId}" />
+							<h:inputHidden value="#{userController.roleId}" />
+							<h:inputHidden value="#{userController.user.userName}" />
+							<h:inputHidden value="#{userController.user.phone}" />
+							<h:inputHidden value="#{userController.user.email}" />
+
+						</h:panelGrid>
+					</p:panel>
+				</h:form>
+			</div>
+		</div>
+	</ui:define>
+</ui:composition>
+</html>
