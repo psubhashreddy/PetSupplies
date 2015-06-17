@@ -12,19 +12,40 @@
 		<h:outputText value="#{i18n.pageHeading}" />
 	</ui:define>
 	<ui:define name="body">
-		<h:form>
-			<br />
-			<div class="listProductDetails">
-				<p:panel
-					header="Products List - #{shoppingController.orderVO.catList.size()} #{i18n.availProductEntries}"
-					toggleable="true" closable="true" toggleSpeed="500">
-					<p:dataTable id="category" value="#{shoppingController.orderVO.catList}"
-						var="categoryObj">
-						<p:column>
-							<f:facet name="header">
-								<h:outputText value="#{categoryObj.categoryName}" />
-							</f:facet>
-							<p:dataTable id="products" value="#{categoryObj.productList}" var="productObj">
+		<div style="margin-top: -20px; height: 100%;">
+			<h:form>
+				<div style="width:28%;float:left;">
+					<p:panel id="viewPnl" header="#{i18n.previewPanelTitle}"
+						toggleable="true" closable="false" toggleSpeed="500"
+						onCloseUpdate="growl" closeSpeed="2000" onToggleUpdate="growl"
+						widgetVar="panel" styleClass="appPanel">
+						<h:panelGrid columns="2" cellpadding="2">
+							<h:outputText value="#{i18n.userName}" />
+							<h:outputText
+								value="#{shoppingController.orderVO.user.firstName},#{shoppingController.orderVO.user.lastName}" />
+							<h:outputText value="#{i18n.phone}" />
+							<h:outputText value="#{shoppingController.orderVO.user.phone}" />
+							<h:outputText value="#{i18n.email}" />
+							<h:outputText value="#{shoppingController.orderVO.user.email}" />
+							<h:outputText value="#{i18n.address}" />
+							<h:outputText
+								value="#{shoppingController.orderVO.user.address},#{shoppingController.orderVO.user.city},#{shoppingController.orderVO.user.state},#{shoppingController.orderVO.user.country}-#{shoppingController.orderVO.user.postalCode}" />
+							<h:outputText value="#{i18n.cartQuantity}" />
+							<h:outputText value="#{shoppingController.orderVO.totalQuantity}" />
+							<h:outputText value="#{i18n.cartPrice}" />
+							<h:outputText value="#{shoppingController.orderVO.totalAmt}" />
+							<h:commandButton value="#{i18n.placeOrder}"
+								action="#{shoppingController.confirmOrder()}" />
+						</h:panelGrid>
+					</p:panel>
+				</div>
+				<div class="productListDiv">
+					<p:panel
+						header="Products List - #{shoppingController.orderVO.prodList.size()} #{i18n.availProductEntries}"
+						toggleable="true" closable="true" toggleSpeed="500" style="height:340px;">
+						<div class="dataTableDiv">
+							<p:dataTable id="product"
+								value="#{shoppingController.orderVO.prodList}" var="productObj">
 								<p:column>
 									<f:facet name="header">
 										<h:outputText value="#{i18n.productCode}" />
@@ -62,11 +83,11 @@
 									<h:outputText value="#{productObj.totalAmount}" />
 								</p:column>
 							</p:dataTable>
-						</p:column>
-					</p:dataTable>
-				</p:panel>
-			</div>
-		</h:form>
+						</div>
+					</p:panel>
+				</div>
+			</h:form>
+		</div>
 	</ui:define>
 </ui:composition>
 </html>
