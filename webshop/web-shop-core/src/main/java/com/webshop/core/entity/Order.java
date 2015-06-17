@@ -2,7 +2,10 @@ package com.webshop.core.entity;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.HashSet;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -13,6 +16,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -24,7 +28,7 @@ import javax.persistence.Table;
 @Entity
 @NamedQueries({
 		@NamedQuery(name = "findAllOrders", query = "SELECT o FROM Order o"),
-		@NamedQuery(name = "findOrdersByOrderId", query = "SELECT o FROM Order o WHERE o.orderId = :orderid"),
+		@NamedQuery(name = "findOrderByOrderNo", query = "SELECT o FROM Order o WHERE o.orderNo = :orderno"),
 		@NamedQuery(name = "findOrdersByPostalCode", query = "SELECT o FROM Order o WHERE o.shipPostalCode = :postalcode"),
 		@NamedQuery(name = "findOrdersByUserPhone", query = "SELECT o FROM Order o WHERE o.shipPhone = :userphone"),
 		@NamedQuery(name = "findOrdersByUserEmail", query = "SELECT o FROM Order o WHERE o.shipEmail = :useremail") })
@@ -36,10 +40,12 @@ public class Order implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ORDER_ID", unique = true, nullable = false)
 	private int orderId;
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "ORDER_DETAILS_ORDER_ID", nullable = false)
-	private OrderDetail orderDetailsOrder;
+	
+	@Column(name = "ORDER_NO", nullable = false)
+	private String orderNo;	
+	
+	@OneToMany(mappedBy = "order", cascade = { CascadeType.PERSIST })
+	private Set<OrderDetail> orderDetail = new HashSet<OrderDetail>();
 
 	@Column(name = "SHIP_ADDRESS", nullable = false, length = 100)
 	private String shipAddress;
@@ -83,13 +89,21 @@ public class Order implements Serializable {
 	public void setOrderId(int orderId) {
 		this.orderId = orderId;
 	}
-
-	public OrderDetail getOrderDetailsOrder() {
-		return this.orderDetailsOrder;
+	
+	public String getOrderNo() {
+		return orderNo;
 	}
 
-	public void setOrderDetailsOrder(OrderDetail orderDetailsOrder) {
-		this.orderDetailsOrder = orderDetailsOrder;
+	public void setOrderNo(String orderNo) {
+		this.orderNo = orderNo;
+	}
+	
+	public Set<OrderDetail> getOrderDetail() {
+		return orderDetail;
+	}
+
+	public void setOrderDetail(Set<OrderDetail> orderDetail) {
+		this.orderDetail = orderDetail;
 	}
 
 	public String getShipAddress() {
