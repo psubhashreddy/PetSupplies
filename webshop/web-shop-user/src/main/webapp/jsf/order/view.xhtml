@@ -52,50 +52,76 @@
 			</h:form>
 			<h:form id="myform">
 				<div class="productListDiv">
-					<p:panel header="Product List"
-						toggleable="true" closable="true" toggleSpeed="500" style="height:340px;">
+					<p:panel header="#{i18n.listPanelTitle}"
+						toggleable="true" closable="true" toggleSpeed="500" style="height:330px;">
 						<div class="dataTableDiv">
-							<p:dataTable value="#{shoppingController.orderVO.catList}" var="categoryObj" > 
+							<p:dataTable value="#{shoppingController.orderVO.prodList}" var="productObj" > 
 								<p:column>
-									<h:outputText value="#{categoryObj.categoryName}" />
-									<p:dataTable value="#{categoryObj.productList}" var="productObj">
-										<p:column>
-											<f:facet name="header">
-												<h:outputText value="#{i18n.productCode}" />
-											</f:facet>
-											<h:outputText value="#{productObj.productCode}" />
-										</p:column>								
-										<p:column>
-											<f:facet name="header">
-												<h:outputText value="#{i18n.productName}" />
-											</f:facet>
-											<h:outputText value="#{productObj.productName}" />
-										</p:column>								
-										<p:column style="width:100px;">
-											<f:facet name="header">
-												<h:outputText value="#{i18n.price}" />
-											</f:facet>
-											<h:outputText value="#{productObj.productPrice}" />
-										</p:column>								
-										<p:column>
-											<f:facet name="header">
-												<h:outputText value="#{i18n.productDesc}" />
-											</f:facet>
-											<h:outputText value="#{productObj.productDesc}" />
-										</p:column>								
-										<p:column style="width:100px;">
-											<f:facet name="header">
-												<h:outputText value="#{i18n.quantity}" />
-											</f:facet>
-											<p:inputText id="quantity" value="#{productObj.quantity}" style="width:100px;"/>
-										</p:column>								
-									</p:dataTable>
-								</p:column>
+									<f:facet name="header">
+										<h:outputText value="#{i18n.productCode}" />
+									</f:facet>
+									<h:outputText value="#{productObj.productCode}" />
+								</p:column>								
+								<p:column>
+									<f:facet name="header">
+										<h:outputText value="#{i18n.productName}" />
+									</f:facet>
+									<h:outputText value="#{productObj.productName}" />
+								</p:column>								
+								<p:column style="width:100px;">
+									<f:facet name="header">
+										<h:outputText value="#{i18n.productPrice}" />
+									</f:facet>
+									<h:outputText value="#{productObj.productPrice}" />
+								</p:column>								
+								<p:column>
+									<f:facet name="header">
+										<h:outputText value="#{i18n.productDesc}" />
+									</f:facet>
+									<h:outputText value="#{productObj.productDesc}" />
+								</p:column>								
+								<p:column style="width:100px;">
+									<f:facet name="header">
+										<h:outputText value="#{i18n.productQuantity}" />
+									</f:facet>
+									<p:inputText value="#{productObj.quantity}" style="width:100px;"/>
+								</p:column>	
+								<p:column style="width:100px;">
+									<f:facet name="header">
+										<h:outputText value="#{i18n.productTotalCost}" />
+									</f:facet>
+									<h:outputText value="#{productObj.totalAmount}" style="width:100px;"/>
+								</p:column>	
+								<p:column style="width:100px;">
+									<f:facet name="header">
+										<h:outputText value="#{i18n.addToCart}" />
+									</f:facet>
+									<h:commandButton value="#{i18n.addToCart}" action="#{shoppingController.addToCart()}" style="width:110px;"/>
+								</p:column>							
 							</p:dataTable>
 						</div>
 					</p:panel>
+					<div style="width: 100%;">
+						<p:dataTable value="#{shoppingController.orderVO}" var="orderVOObj">
+							<p:column>
+								<h:outputText value="#{i18n.cartQuantity}"/>
+							</p:column>
+							<p:column>
+								<h:outputText value="#{orderVOObj.totalQuantity}" />
+							</p:column>
+							<p:column>
+								<h:outputText value="#{i18n.cartPrice}"/>
+							</p:column>
+							<p:column>
+								<h:outputText value="#{orderVOObj.totalAmt}" />
+							</p:column>
+							<p:column>
+								<h:commandButton value="#{i18n.placeOrder}" action="#{shoppingController.placeOrder()}" />
+							</p:column>
+						</p:dataTable>
+					</div>	
 				</div>
-<!-- 				<div><h:outputText value="Total Amount:" /><h:outputText id="model" value="#{shoppingController.orderVO.totalAmt}" /></div> -->
+				
 			</h:form>
 		</div>
 	</ui:define>
