@@ -4,12 +4,13 @@
 package com.webshop.user.controller;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
+import java.util.Set;
 import java.util.logging.Logger;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
@@ -17,12 +18,16 @@ import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
 import com.webshop.core.entity.Category;
+import com.webshop.core.entity.Order;
+import com.webshop.core.entity.OrderDetail;
 import com.webshop.core.entity.Product;
+import com.webshop.core.entity.User;
 import com.webshop.core.service.CategoryService;
 import com.webshop.core.service.ProductService;
 import com.webshop.core.service.ShoppingService;
 import com.webshop.core.utils.Constants;
-import com.webshop.user.vo.CategoryVO;
+import com.webshop.core.utils.DateConverterUtil;
+import com.webshop.user.util.NumericGenerator;
 import com.webshop.user.vo.OrderVO;
 import com.webshop.user.vo.ProductVO;
 
@@ -51,7 +56,6 @@ public class ShoppingController {
 	private String productDesc;
 	private List<Product> productList = new ArrayList<Product>();
 	private List<Category> categoryList = new ArrayList<Category>();
-	private Map<String, List<Product>> catMap = new HashMap<String, List<Product>>();
 	private OrderVO orderVO = new OrderVO();
 
 	/**
@@ -115,21 +119,6 @@ public class ShoppingController {
 	}
 
 	/**
-	 * @return the catMap
-	 */
-	public Map<String, List<Product>> getCatMap() {
-		return catMap;
-	}
-
-	/**
-	 * @param catMap
-	 *            the catMap to set
-	 */
-	public void setCatMap(Map<String, List<Product>> catMap) {
-		this.catMap = catMap;
-	}
-
-	/**
 	 * @return the orderVO
 	 */
 	public OrderVO getOrderVO() {
@@ -164,13 +153,14 @@ public class ShoppingController {
 		logger.info("*** showAllProducts in Controller ***");
 		HttpSession currentSession = (HttpSession) FacesContext
 				.getCurrentInstance().getExternalContext().getSession(false);
-		List<CategoryVO> categoryLst = new ArrayList<CategoryVO>();
-		Object object = currentSession.getAttribute(Constants.DISPLAY_CAT_LIST);
+		Object object = currentSession.getAttribute(Constants.DISPLAY_LIST);
 		if (object != null) {
-			currentSession.setAttribute(Constants.DISPLAY_CAT_LIST, null);
+			currentSession.setAttribute(Constants.DISPLAY_LIST, null);
 		} else {
-			categoryLst.addAll(constructCatList(getProductList()));
-			this.orderVO.setCatList(categoryLst);
+			this.orderVO.setTotalAmt(0);
+			this.orderVO.setTotalQuantity(0);
+			this.orderVO.setUser((User)currentSession.getAttribute(Constants.LOGGED_IN_USER));
+			this.orderVO.setProdList(constructProductVOList(getProductList()));
 		}
 		return Constants.SHOW_ALL_PRODUCTS;
 	}
@@ -183,9 +173,41 @@ public class ShoppingController {
 	 */
 	public String searchProducts() {
 		logger.info("*** searchProducts in Controller ***");
-		this.orderVO.setCatList(constructCatList(shoppingService
-				.searchProducts(categoryId, productDesc)));
+		this.orderVO.setTotalAmt(0);
+		this.orderVO.setTotalQuantity(0);
+		this.orderVO.setProdList(constructProductVOList(shoppingService.searchProducts(categoryId, productDesc)));
 		return Constants.SHOW_ALL_PRODUCTS;
+	}
+	
+	/**
+	 * This method is for adding a product to the cart and doing necessary calculations
+	 * 
+	 * @see com.webshop.user.controller.ShoppingController#addToCart()
+	 * @return String
+	 */
+	public String addToCart(){
+		logger.info("*** addToCart in Controller ***");
+		calculateTotals();
+		return Constants.SHOW_ALL_PRODUCTS;
+	}
+	
+	/**
+	 * This method is for calculating the totals for the quantity and amount
+	 * @see com.webshop.user.controller.ShoppingController#calculateTotals()
+	 */
+	private void calculateTotals(){
+		List<ProductVO> productList = new ArrayList<ProductVO>();
+		double totalAmount = 0.0;
+		int totalQuantity = 0;
+		for(ProductVO prod: this.orderVO.getProdList()){
+			prod.setTotalAmount(prod.getQuantity()*prod.getProductPrice());
+			totalAmount = totalAmount + prod.getTotalAmount();
+			totalQuantity = totalQuantity + prod.getQuantity();
+			productList.add(prod);
+		}
+		this.orderVO.setTotalAmt(totalAmount);
+		this.orderVO.setTotalQuantity(totalQuantity);
+		this.orderVO.setProdList(productList);
 	}
 
 	/**
@@ -197,6 +219,15 @@ public class ShoppingController {
 	 */
 	public String placeOrder() {
 		logger.info("*** placeOrder in Controller ***");
+		calculateTotals();
+		List<ProductVO> productList = new ArrayList<ProductVO>();
+		for(ProductVO productVO : this.orderVO.getProdList()){
+			if(productVO.getQuantity() > 0) {
+				productList.add(productVO);
+			}
+		}
+		this.orderVO.setProdList(productList);
+		
 		return Constants.PREVIEW_MY_ORDER;
 	}
 
@@ -209,57 +240,83 @@ public class ShoppingController {
 	 */
 	public String confirmOrder() {
 		logger.info("*** confirmOrder in Controller ***");
+		this.orderVO.setOrderDate(DateConverterUtil.dateToTimeStamp());
+		this.orderVO.setOrderNum(NumericGenerator.generateAlphaNumericNumeric());
+		shoppingService.createOrder(processOrderVO(this.orderVO));
+		FacesMessage facesMsg = new FacesMessage(
+				FacesMessage.SEVERITY_INFO,
+				Constants.ORDER_CREATION_SUCCESS,
+				Constants.ORDER_CREATION_SUCCESS);
+		FacesContext.getCurrentInstance().getExternalContext()
+				.getFlash().setKeepMessages(true);
+		FacesContext.getCurrentInstance().addMessage(null, facesMsg);
 		return Constants.CONFIRM_MY_ORDER;
 	}
 
 	/**
-	 * This method is for constructing the value Object with the list of
-	 * categories and products used to display in the view
+	 * This method is for constructing productVOList 
 	 * 
-	 * @see com.webshop.user.controller.ShoppingController#constructCatList()
-	 * @return List<CategoryVO>
+	 * @see com.webshop.user.controller.ShoppingController#constructProductVOList()
+	 * @return List<ProductVO>
 	 */
-	private List<CategoryVO> constructCatList(List<Product> productList) {
-		List<CategoryVO> catList = new ArrayList<CategoryVO>();
-		Map<String, List<ProductVO>> productMap = constructCategoryMap(productList);
-		for (Category category : getCategoryList()) {
-			CategoryVO categoryVO = new CategoryVO();
-			categoryVO.setCategoryId(category.getCategoryId());
-			categoryVO.setCategoryName(category.getCategoryName());
-			categoryVO.setCategoryDesc(category.getCategoryDescription());
-			categoryVO
-					.setProductList(productMap.get(category.getCategoryName()));
-			catList.add(categoryVO);
-		}
-		return catList;
-	}
-
-	/**
-	 * This method is for constructing a Map with the categoryName as the Key
-	 * and productList for each category as the value.
-	 * 
-	 * @see com.webshop.user.controller.ShoppingController#constructCategoryMap()
-	 * @return Map<String, List<ProductVO>>
-	 */
-	private Map<String, List<ProductVO>> constructCategoryMap(
+	private List<ProductVO> constructProductVOList(
 			List<Product> productList) {
-		Map<String, List<ProductVO>> categoryMap = new HashMap<String, List<ProductVO>>();
+		List<ProductVO> prodList = new ArrayList<ProductVO>();
 		for (Product product : productList) {
-			if (categoryMap.get(product.getCategory().getCategoryName()) != null) {
-				ProductVO productVO = new ProductVO();
-				productVO.setCategoryId(product.getCategory().getCategoryId());
-				productVO.setProductId(product.getProductId());
-				productVO.setProductCode(product.getProductCode());
-				productVO.setProductName(product.getProductName());
-				productVO.setProductPrice(product.getProductPrice());
-				productVO.setProductDesc(product.getProductDescription());
-				categoryMap.get(product.getCategory().getCategoryName()).add(productVO);
-			}else{
-				categoryMap.put(product.getCategory().getCategoryName(),
-						new ArrayList<ProductVO>());
-			}
+			ProductVO productVO = new ProductVO();
+			productVO.setCategoryId(product.getCategory().getCategoryId());
+			productVO.setProductId(product.getProductId());
+			productVO.setProductCode(product.getProductCode());
+			productVO.setProductName(product.getProductName());
+			productVO.setProductPrice(product.getProductPrice());
+			productVO.setProductDesc(product.getProductDescription());
+			prodList.add(productVO);
 		}
-		return categoryMap;
+		return prodList;
+	}
+	
+	/**
+	 * This method is for constructing the order entity from the orderVO. 
+	 * 
+	 * @see com.webshop.user.controller.ShoppingController#constructProductVOList()
+	 * @param OrderVO
+	 * @return Order
+	 */
+	private Order processOrderVO(OrderVO orderVO){
+		Order order = new Order();
+		order.setOrderNo(orderVO.getOrderNum());
+		order.setShipName(orderVO.getUser().getFirstName()+" "+orderVO.getUser().getLastName());
+		order.setShipPhone(orderVO.getUser().getPhone());
+		order.setShipEmail(orderVO.getUser().getEmail());
+		order.setShipAddress(orderVO.getUser().getAddress());
+		order.setShipCity(orderVO.getUser().getCity());
+		order.setShipState(orderVO.getUser().getState());
+		order.setShipCountry(orderVO.getUser().getCountry());
+		order.setShipPostalCode(orderVO.getUser().getPostalCode());
+		order.setShippingDate(DateConverterUtil.getDateAfterDays(5));
+		
+		Set<OrderDetail> orderDetailSet = new HashSet<OrderDetail>();
+		for(ProductVO productVO: orderVO.getProdList()){
+			OrderDetail orderDetail = new OrderDetail();
+			orderDetail.setOrderCost(productVO.getTotalAmount());
+			orderDetail.setOrderDiscount(0);
+			orderDetail.setOrderQuantity(productVO.getQuantity());
+			
+			Product product = new Product();
+			product.setProductId(productVO.getProductId());
+			product.setProductCode(productVO.getProductCode());
+			product.setProductName(productVO.getProductName());
+			product.setProductPrice(productVO.getProductPrice());
+			product.setProductDescription(productVO.getProductDesc());
+			
+			orderDetail.setProduct(product);
+			orderDetail.setOrder(order);
+			orderDetailSet.add(orderDetail);
+			
+		}
+		order.setOrderDetail(orderDetailSet);
+		order.setUser(orderVO.getUser());
+		return order;	
 	}
 
 }
