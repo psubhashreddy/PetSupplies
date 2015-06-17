@@ -35,7 +35,6 @@ import javax.persistence.Table;
 		@NamedQuery(name = "findProductsByDescription", query = "SELECT p FROM Product p WHERE p.productDescription = :productdesc"),
 		@NamedQuery(name = "findProductsByPrice", query = "SELECT p FROM Product p WHERE p.productPrice = :productprice"),
 		@NamedQuery(name = "findProductsByCategoryId", query = "SELECT p FROM Product p WHERE p.category.categoryId = :categoryid"),
-		@NamedQuery(name = "findProductsByOrderId", query = "SELECT p FROM Product p WHERE p.orderDetailsOrderId = :productorderId"),
 		@NamedQuery(name = "findProductsByCriteria", query = "SELECT p FROM Product p WHERE p.productCode = :productcode and p.productName = :productname"),
 		@NamedQuery(name = "findProductsByCategory", query = "SELECT p FROM Product p WHERE p.category.categoryId = :categoryid and UPPER(p.productDescription) like :productdesc")
 
@@ -58,9 +57,6 @@ public class Product implements Serializable {
 
 	@Column(name = "LAST_UPDATED_DATE", nullable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
 	private Timestamp lastUpdatedDate;
-
-	@Column(name = "ORDER_DETAILS_ORDER_ID", nullable = true)
-	private int orderDetailsOrderId;
 
 	@Column(name = "PRODUCT_CODE", nullable = false, length = 10)
 	private String productCode;
@@ -112,14 +108,6 @@ public class Product implements Serializable {
 		this.lastUpdatedDate = lastUpdatedDate;
 	}
 
-	public int getOrderDetailsOrderId() {
-		return this.orderDetailsOrderId;
-	}
-
-	public void setOrderDetailsOrderId(int orderDetailsOrderId) {
-		this.orderDetailsOrderId = orderDetailsOrderId;
-	}
-
 	public String getProductCode() {
 		return this.productCode;
 	}
@@ -169,7 +157,6 @@ public class Product implements Serializable {
 	public String toString() {
 		return "Product [productId=" + productId + ", category=" + category
 				+ ", image=" + image + ", lastUpdatedDate=" + lastUpdatedDate
-				+ ", orderDetailsOrderId=" + orderDetailsOrderId
 				+ ", productCode=" + productCode + ", productDescription="
 				+ productDescription + ", productName=" + productName
 				+ ", productPrice=" + productPrice + "]";
