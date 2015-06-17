@@ -1,10 +1,7 @@
 package com.webshop.core.entity;
 
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -15,7 +12,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -25,7 +21,10 @@ import javax.persistence.Table;
  * @date 31st May 2015
  */
 @Entity
-@NamedQueries({ @NamedQuery(name = "OrderDetail.findAll", query = "SELECT o FROM OrderDetail o") })
+@NamedQueries({ 
+	@NamedQuery(name = "findAllOrderDetails", query = "SELECT o FROM OrderDetail o"), 
+	@NamedQuery(name = "findOrderDetailByOrderNo", query = "SELECT o FROM OrderDetail o where o.order.orderNo = :orderNo")
+	})
 @Table(name = "ORDER_DETAILS")
 public class OrderDetail implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -36,13 +35,14 @@ public class OrderDetail implements Serializable {
 	private int detailId;
 
 	@Column(name = "ORDER_COST", nullable = false)
-	private int orderCost;
+	private double orderCost;
 
 	@Column(name = "ORDER_DISCOUNT", nullable = false)
-	private int orderDiscount;
-
-	@OneToMany(mappedBy = "orderDetailsOrder", cascade = { CascadeType.PERSIST })
-	private Set<Order> order = new HashSet<Order>();
+	private double orderDiscount;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "ORDER_NO", nullable = false)
+	private Order order;
 
 	@Column(name = "ORDER_QUANTITY", nullable = false)
 	private int orderQuantity;
@@ -54,9 +54,6 @@ public class OrderDetail implements Serializable {
 	public OrderDetail() {
 	}
 
-	/**
-	 * @return the detailId
-	 */
 	public int getDetailId() {
 		return detailId;
 	}
@@ -65,27 +62,27 @@ public class OrderDetail implements Serializable {
 		this.detailId = detailId;
 	}
 
-	public int getOrderCost() {
+	public double getOrderCost() {
 		return this.orderCost;
 	}
 
-	public void setOrderCost(int orderCost) {
+	public void setOrderCost(double orderCost) {
 		this.orderCost = orderCost;
 	}
 
-	public int getOrderDiscount() {
+	public double getOrderDiscount() {
 		return this.orderDiscount;
 	}
 
-	public void setOrderDiscount(int orderDiscount) {
+	public void setOrderDiscount(double orderDiscount) {
 		this.orderDiscount = orderDiscount;
 	}
-
-	public Set<Order> getOrder() {
-		return this.order;
+	
+	public Order getOrder() {
+		return order;
 	}
 
-	public void setOrder(Set<Order> order) {
+	public void setOrder(Order order) {
 		this.order = order;
 	}
 
@@ -101,7 +98,7 @@ public class OrderDetail implements Serializable {
 		return this.product;
 	}
 
-	public void setProductId(Product product) {
+	public void setProduct(Product product) {
 		this.product = product;
 	}
 
