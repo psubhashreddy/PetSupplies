@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import com.webshop.core.entity.User;
+
 /**
  * @author speddyre
  * @date 12th June 2015
@@ -14,24 +16,13 @@ import java.util.List;
  */
 public class OrderVO {
 	
-	private List<CategoryVO> catList = new ArrayList<CategoryVO>();
 	private List<ProductVO> prodList = new ArrayList<ProductVO>();
+	private User user = new User();
 	private double totalAmt = 0.0;
 	private Date orderDate;
 	private String orderNum;
 	private int totalQuantity = 0;
-	/**
-	 * @return the catList
-	 */
-	public List<CategoryVO> getCatList() {
-		return catList;
-	}
-	/**
-	 * @param catList the catList to set
-	 */
-	public void setCatList(List<CategoryVO> catList) {
-		this.catList = catList;
-	}
+
 	/**
 	 * @return the prodList
 	 */
@@ -43,6 +34,19 @@ public class OrderVO {
 	 */
 	public void setProdList(List<ProductVO> prodList) {
 		this.prodList = prodList;
+	}
+	
+	/**
+	 * @return the user
+	 */
+	public User getUser() {
+		return user;
+	}
+	/**
+	 * @param user the user to set
+	 */
+	public void setUser(User user) {
+		this.user = user;
 	}
 	/**
 	 * @return the totalAmt
@@ -97,10 +101,12 @@ public class OrderVO {
 	 */
 	@Override
 	public String toString() {
-		return "OrderVO [catList=" + catList + ", prodList=" + prodList
+		return "OrderVO [prodList=" + prodList + ", user=" + user
 				+ ", totalAmt=" + totalAmt + ", orderDate=" + orderDate
 				+ ", orderNum=" + orderNum + ", totalQuantity=" + totalQuantity
 				+ "]";
 	}
+	
+	
 	
 }
