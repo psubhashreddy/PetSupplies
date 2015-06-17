@@ -19,7 +19,7 @@ public final class Constants {
 	}
 	
 	public static final String LOGGED_IN_USER = "userLoggedIn";
-	public static final String DISPLAY_CAT_LIST = "displayList";
+	public static final String DISPLAY_LIST = "displayList";
 	public static final String SUCCESS = "Success";
 	public static final String FAILURE = "Failure";
 	public static final String USER_TYPE = "User";
@@ -78,6 +78,8 @@ public final class Constants {
 	public static final String CATEGORY_DELETION_SUCCESS = "Category is deleted successfully";
 	public static final String CATEGORY_DELETION_FAILURE = "Failed to Delete Category. Please try after some time.";
 	public static final String CATEGORY_DELETION_EXCEPTION = "Exception occured while deleting Category.";
+	
+	public static final String ORDER_CREATION_SUCCESS = "Congratulations ! Your order has been created successfully.";
 
 	/** Controller URL Mapping **/
 	public static final String WEBSHOP_LOGIN = "/login.xhtml";
@@ -131,6 +133,8 @@ public final class Constants {
 	public static final String PRODUCT_NAME = "productname";
 	public static final String PRODUCT_PRICE = "productprice";
 	public static final String PRODUCT_DESC = "productdesc";
+	
+	public static final String ORDER_NO = "orderno";
 	
 
 }
