@@ -37,4 +37,13 @@ public final class DateConverterUtil {
 		return new Timestamp(utilDate.getTime());
 
 	}
+	
+	public static Timestamp getDateAfterDays(int noOfDays){
+		Date utilDate = new Date();
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(utilDate);
+		cal.add(Calendar.DATE, noOfDays);
+		cal.set(Calendar.MILLISECOND, 0);
+		return new Timestamp(utilDate.getTime());
+	}
 }
