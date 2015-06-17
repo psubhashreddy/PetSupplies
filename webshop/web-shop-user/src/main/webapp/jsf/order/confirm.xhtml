@@ -13,9 +13,42 @@
 	</ui:define>
 	<ui:define name="body">
 		<h:form>
-			<br />
-			<div class="listProductDetails">
-				
+			<div style="width:100%;margin-left:400px"><h:messages errorStyle="color: red" infoStyle="color: green" layout="table" /></div>
+			<div style="width:40%;margin: 0px auto;">				
+				<p:panel id="viewPnl" header="#{i18n.orderConfirmationPanelTitle}"
+					toggleable="true" closable="false" toggleSpeed="500"
+					onCloseUpdate="growl" closeSpeed="2000" onToggleUpdate="growl"
+					widgetVar="panel" styleClass="appPanel">
+					<div style="font-size: 14px;">
+						<h:panelGrid columns="2" cellpadding="5">
+							<h:outputText value="#{i18n.cartQuantity}"  style="width:200px;"/>
+							<h:outputText value="#{shoppingController.orderVO.totalQuantity}" />
+							<h:outputText value="#{i18n.cartPrice}" style="width:200px;"/>
+							<h:outputText value="#{shoppingController.orderVO.totalAmt}" />
+							<h:outputText value="#{i18n.orderNumber}" style="width:200px;"/>
+							<h:outputText value="#{shoppingController.orderVO.orderNum}" />
+							<h:outputText value="#{i18n.orderDate}" style="width:200px;"/>
+							<h:outputText value="#{shoppingController.orderVO.orderDate}" />
+						</h:panelGrid>
+					</div>		
+					<hr/>
+					<h:outputText value="#{i18n.shippingAddr}" style="font-sze:22px;font-weight:bold;"/>
+					<hr/>
+					<div style="font-size: 14px;">
+						<h:panelGrid columns="2" cellpadding="5">
+							<h:outputText value="#{i18n.userName}" style="width:200px;"/>
+							<h:outputText
+								value="#{shoppingController.orderVO.user.firstName},#{shoppingController.orderVO.user.lastName}" />
+							<h:outputText value="#{i18n.phone}" style="width:200px;"/>
+							<h:outputText value="#{shoppingController.orderVO.user.phone}" />
+							<h:outputText value="#{i18n.email}" style="width:200px;"/>
+							<h:outputText value="#{shoppingController.orderVO.user.email}" />
+							<h:outputText value="#{i18n.address}" style="width:200px;"/>
+							<h:outputText
+								value="#{shoppingController.orderVO.user.address},#{shoppingController.orderVO.user.city},#{shoppingController.orderVO.user.state},#{shoppingController.orderVO.user.country}-#{shoppingController.orderVO.user.postalCode}" />
+						</h:panelGrid>
+					</div>
+				</p:panel>
 			</div>
 		</h:form>
 	</ui:define>
