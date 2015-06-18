@@ -22,4 +22,5 @@ public interface ShoppingService {
 	
 	List<OrderDetail> searchOrderDetailsByOrderNo(String orderNo);
 
+	Order searchOrderByOrderNo(String orderNo);
 }
