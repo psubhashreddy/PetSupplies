@@ -35,20 +35,13 @@
 							<h:commandLink action="#{shoppingController.showAllProducts()}"
 								value="#{i18n.showProductLink}" />
 						</p>
+						<p>
+							<h:commandLink action="#{shoppingController.searchMyOrder()}"
+								value="#{i18n.searchMyOrderLink}" />
+						</p>
 					</h:panelGrid>
 				</p:panel>
 			</div>
-			<!-- <div class="mngPanel">
-				<p:panel id="createCategoryPnl" header="#{i18n.productMngPanelTitle}"
-					toggleable="true" closable="false" toggleSpeed="500"
-					onCloseUpdate="growl" closeSpeed="2000" onToggleUpdate="growl"
-					widgetVar="panel">
-					<h:panelGrid columns="2" cellpadding="10">
-						<p><h:commandLink action="#{categoryController.createCategory}" value="#{i18n.createCategoryBtn}"/></p>
-						<p><h:commandLink action="#{categoryController.searchCategory}" value="#{i18n.searchCategoryBtn}"/></p>
-					</h:panelGrid>
-				</p:panel>
-			</div> -->
 		</h:form>
 	</ui:define>
 </ui:composition>
