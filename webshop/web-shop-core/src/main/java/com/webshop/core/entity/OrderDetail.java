@@ -40,7 +40,7 @@ public class OrderDetail implements Serializable {
 	@Column(name = "ORDER_DISCOUNT", nullable = false)
 	private double orderDiscount;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "ORDER_NO", nullable = false)
 	private Order order;
 
