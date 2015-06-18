@@ -22,6 +22,7 @@ public class OrderVO {
 	private Date orderDate;
 	private String orderNum;
 	private int totalQuantity = 0;
+	private String status;
 
 	/**
 	 * @return the prodList
@@ -95,6 +96,19 @@ public class OrderVO {
 	 */
 	public void setTotalQuantity(int totalQuantity) {
 		this.totalQuantity = totalQuantity;
+	}
+	
+	/**
+	 * @return the status
+	 */
+	public String getStatus() {
+		return status;
+	}
+	/**
+	 * @param status the status to set
+	 */
+	public void setStatus(String status) {
+		this.status = status;
 	}
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
