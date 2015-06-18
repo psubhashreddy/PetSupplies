@@ -23,5 +23,5 @@ public interface ShoppingDAO {
 	Order searchOrderByOrderNo(String orderNo);
 
 	List<OrderDetail> searchOrderDetailsByOrderNo(String orderNo);
-
+	
 }
