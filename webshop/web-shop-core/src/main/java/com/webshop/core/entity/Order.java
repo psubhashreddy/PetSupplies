@@ -44,7 +44,7 @@ public class Order implements Serializable {
 	@Column(name = "ORDER_NO", nullable = false)
 	private String orderNo;	
 	
-	@OneToMany(mappedBy = "order", cascade = { CascadeType.PERSIST })
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "order", cascade = { CascadeType.PERSIST })
 	private Set<OrderDetail> orderDetail = new HashSet<OrderDetail>();
 
 	@Column(name = "SHIP_ADDRESS", nullable = false, length = 100)
