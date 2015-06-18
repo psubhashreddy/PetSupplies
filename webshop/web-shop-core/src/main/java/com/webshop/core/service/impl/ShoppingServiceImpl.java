@@ -65,5 +65,17 @@ public class ShoppingServiceImpl implements ShoppingService {
 		logger.info("**** In searchOrderDetailsByOrderNo in ServiceImpl *****");
 		return shoppingDAO.searchOrderDetailsByOrderNo(orderNo);
 	}
+	
+	/**
+	 * This method is for searching the order by order no
+	 * (non-Javadoc)
+	 * @see com.webshop.core.service.ShoppingService#searchOrderByOrderNo(java.lang.String)
+	 * @param String
+	 * @return List<Order>
+	 */
+	public Order searchOrderByOrderNo(String orderNo){
+		logger.info("**** In searchOrderByOrderNo in ServiceImpl *****");
+		return shoppingDAO.searchOrderByOrderNo(orderNo);
+	}
 
 }
