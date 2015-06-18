@@ -20,6 +20,8 @@ public final class Constants {
 	
 	public static final String LOGGED_IN_USER = "userLoggedIn";
 	public static final String DISPLAY_LIST = "displayList";
+	public static final String IN_PROGRESS = "In Progress";
+	public static final String DELIVERED = "Delivered";
 	public static final String SUCCESS = "Success";
 	public static final String FAILURE = "Failure";
 	public static final String USER_TYPE = "User";
@@ -114,6 +116,7 @@ public final class Constants {
 	public static final String SHOW_ALL_PRODUCTS = "/jsf/order/view";
 	public static final String PREVIEW_MY_ORDER = "/jsf/order/preview";
 	public static final String CONFIRM_MY_ORDER = "/jsf/order/confirm";
+	public static final String SEARCH_MY_ORDER = "/jsf/order/search";
 	
 	
 	public static final String ROLE_ID = "roleid";
