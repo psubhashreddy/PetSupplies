@@ -3,6 +3,7 @@
  */
 package com.webshop.core.dao.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -80,7 +81,7 @@ public class ShoppingDAOImpl implements ShoppingDAO {
 			Query query = em
 					.createNamedQuery("findOrderByOrderNo", Order.class)
 					.setParameter(Constants.ORDER_NO, orderNo);
-			return (Order) query.getSingleResult();
+			return  (Order) query.getSingleResult();
 		} catch (Exception e) {
 			logger.log(Level.SEVERE, "Exception in findOrderByOrderNo ", e);
 			return null;
@@ -105,7 +106,7 @@ public class ShoppingDAOImpl implements ShoppingDAO {
 		} catch (Exception e) {
 			logger.log(Level.SEVERE,
 					"Exception in searchOrderDetailsbyOrderNo ", e);
-			return null;
+			return new ArrayList<OrderDetail>();
 		}
 	}
 
