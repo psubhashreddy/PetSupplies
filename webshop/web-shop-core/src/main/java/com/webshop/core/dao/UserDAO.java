@@ -10,28 +10,29 @@ import com.webshop.core.entity.User;
  * @author speddyre
  * @date 2nd June 2015
  */
-public interface UserDAO {
+public interface UserDAO
+{
 
-	String createUser(User userId);
+   String createUser(User userId);
 
-	boolean deleteUser(int user);
+   boolean deleteUser(int user);
 
-	boolean updateUser(User user);
+   boolean updateUser(User user);
 
-	List<User> getUserList();
+   List<User> getUserList();
 
-	User searchUserByUserId(int userId);
+   User searchUserByUserId(int userId);
 
-	User searchUsersByUserName(String userName);
+   User searchUsersByUserName(String userName);
 
-	List<User> searchUsersByFirstName(String firstName);
+   List<User> searchUsersByFirstName(String firstName);
 
-	List<User> searchUsersByLastName(String lastName);
+   List<User> searchUsersByLastName(String lastName);
 
-	User searchUsersByPhone(String phone);
+   User searchUsersByPhone(String phone);
 
-	User searchUsersByEmail(String email);
+   User searchUsersByEmail(String email);
 
-	List<User> searchUsersByCriteria(User user);
+   List<User> searchUsersByCriteria(User user);
 
 }

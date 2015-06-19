@@ -13,20 +13,21 @@ import com.webshop.core.entity.Role;
  * @author speddyre
  * @date 3rd June 2015
  */
-public interface RoleService {
+public interface RoleService
+{
 
-	String createRole(Role role);
+   String createRole(Role role);
 
-	boolean deleteRole(int role);
+   boolean deleteRole(int role);
 
-	boolean updateRole(Role role);
+   boolean updateRole(Role role);
 
-	List<Role> getRoles();
+   List<Role> getRoles();
 
-	List<Role> getRolesByCriteria(Role role);
+   List<Role> getRolesByCriteria(Role role);
 
-	Role getUserRole();
+   Role getUserRole();
 
-	Role getRoleByRoleId(int roleId);
+   Role getRoleByRoleId(int roleId);
 
 }

@@ -12,15 +12,15 @@ import com.webshop.core.entity.Product;
 /**
  * @author speddyre
  * @dated 12th June 2015
- *
  */
-public interface ShoppingService {
+public interface ShoppingService
+{
 
-	List<Product> searchProducts(int categoryId, String productDesc);
-	
-	boolean createOrder(Order order);
-	
-	List<OrderDetail> searchOrderDetailsByOrderNo(String orderNo);
+   List<Product> searchProducts(int categoryId, String productDesc);
 
-	Order searchOrderByOrderNo(String orderNo);
+   boolean createOrder(Order order);
+
+   List<OrderDetail> searchOrderDetailsByOrderNo(String orderNo);
+
+   Order searchOrderByOrderNo(String orderNo);
 }

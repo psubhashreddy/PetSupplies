@@ -13,22 +13,23 @@ import com.webshop.core.entity.Category;
  * @author speddyre
  * @date 3rd June 2015
  */
-public interface CategoryDAO {
+public interface CategoryDAO
+{
 
-	String createCategory(Category category);
+   String createCategory(Category category);
 
-	boolean deleteCategory(int categoryId);
+   boolean deleteCategory(int categoryId);
 
-	boolean updateCategory(Category category);
+   boolean updateCategory(Category category);
 
-	List<Category> getCategories();
+   List<Category> getCategories();
 
-	Category getCategoryByCategoryId(int categoryId);
+   Category getCategoryByCategoryId(int categoryId);
 
-	Category getCategoryByCategoryName(String categoryName);
+   Category getCategoryByCategoryName(String categoryName);
 
-	Category getCategoryByCategoryDescription(String categoryDescription);
+   Category getCategoryByCategoryDescription(String categoryDescription);
 
-	List<Category> searchCategoriesByCriteria(Category category);
+   List<Category> searchCategoriesByCriteria(Category category);
 
 }

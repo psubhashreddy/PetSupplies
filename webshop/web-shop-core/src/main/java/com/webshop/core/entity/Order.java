@@ -26,164 +26,190 @@ import javax.persistence.Table;
  * @date 31st May 2015
  */
 @Entity
-@NamedQueries({
-		@NamedQuery(name = "findAllOrders", query = "SELECT o FROM Order o"),
-		@NamedQuery(name = "findOrderByOrderNo", query = "SELECT o FROM Order o WHERE o.orderNo = :orderno"),
-		@NamedQuery(name = "findOrdersByPostalCode", query = "SELECT o FROM Order o WHERE o.shipPostalCode = :postalcode"),
-		@NamedQuery(name = "findOrdersByUserPhone", query = "SELECT o FROM Order o WHERE o.shipPhone = :userphone"),
-		@NamedQuery(name = "findOrdersByUserEmail", query = "SELECT o FROM Order o WHERE o.shipEmail = :useremail") })
+@NamedQueries({ @NamedQuery(name = "findAllOrders", query = "SELECT o FROM Order o"), @NamedQuery(name = "findOrderByOrderNo", query = "SELECT o FROM Order o WHERE o.orderNo = :orderno"),
+      @NamedQuery(name = "findOrdersByPostalCode", query = "SELECT o FROM Order o WHERE o.shipPostalCode = :postalcode"),
+      @NamedQuery(name = "findOrdersByUserPhone", query = "SELECT o FROM Order o WHERE o.shipPhone = :userphone"),
+      @NamedQuery(name = "findOrdersByUserEmail", query = "SELECT o FROM Order o WHERE o.shipEmail = :useremail") })
 @Table(name = "ORDERS")
-public class Order implements Serializable {
-	private static final long serialVersionUID = 1L;
+public class Order implements Serializable
+{
+   private static final long serialVersionUID = 1L;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "ORDER_ID", unique = true, nullable = false)
-	private int orderId;
-	
-	@Column(name = "ORDER_NO", nullable = false)
-	private String orderNo;	
-	
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "order", cascade = { CascadeType.PERSIST })
-	private Set<OrderDetail> orderDetail = new HashSet<OrderDetail>();
+   @Id
+   @GeneratedValue(strategy = GenerationType.IDENTITY)
+   @Column(name = "ORDER_ID", unique = true, nullable = false)
+   private int orderId;
 
-	@Column(name = "SHIP_ADDRESS", nullable = false, length = 100)
-	private String shipAddress;
+   @Column(name = "ORDER_NO", nullable = false)
+   private String orderNo;
 
-	@Column(name = "SHIP_CITY", nullable = false, length = 50)
-	private String shipCity;
+   @OneToMany(fetch = FetchType.EAGER, mappedBy = "order", cascade = { CascadeType.PERSIST })
+   private Set<OrderDetail> orderDetail = new HashSet<OrderDetail>();
 
-	@Column(name = "SHIP_COUNTRY", nullable = false, length = 50)
-	private String shipCountry;
+   @Column(name = "SHIP_ADDRESS", nullable = false, length = 100)
+   private String shipAddress;
 
-	@Column(name = "SHIP_EMAIL", nullable = false, length = 30)
-	private String shipEmail;
+   @Column(name = "SHIP_CITY", nullable = false, length = 50)
+   private String shipCity;
 
-	@Column(name = "SHIP_NAME", nullable = false, length = 50)
-	private String shipName;
+   @Column(name = "SHIP_COUNTRY", nullable = false, length = 50)
+   private String shipCountry;
 
-	@Column(name = "SHIP_PHONE", nullable = false, length = 15)
-	private String shipPhone;
+   @Column(name = "SHIP_EMAIL", nullable = false, length = 30)
+   private String shipEmail;
 
-	@Column(name = "SHIP_POSTAL_CODE", nullable = false, length = 10)
-	private String shipPostalCode;
+   @Column(name = "SHIP_NAME", nullable = false, length = 50)
+   private String shipName;
 
-	@Column(name = "SHIP_STATE", nullable = false, length = 50)
-	private String shipState;
+   @Column(name = "SHIP_PHONE", nullable = false, length = 15)
+   private String shipPhone;
 
-	@Column(name = "SHIPPING_DATE", nullable = false)
-	private Timestamp shippingDate;
+   @Column(name = "SHIP_POSTAL_CODE", nullable = false, length = 10)
+   private String shipPostalCode;
 
-	// Uni-directional many-to-one association to User
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "USER_ID", nullable = false)
-	private User user;
+   @Column(name = "SHIP_STATE", nullable = false, length = 50)
+   private String shipState;
 
-	public Order() {
-	}
+   @Column(name = "SHIPPING_DATE", nullable = false)
+   private Timestamp shippingDate;
 
-	public int getOrderId() {
-		return this.orderId;
-	}
+   // Uni-directional many-to-one association to User
+   @ManyToOne(fetch = FetchType.LAZY)
+   @JoinColumn(name = "USER_ID", nullable = false)
+   private User user;
 
-	public void setOrderId(int orderId) {
-		this.orderId = orderId;
-	}
-	
-	public String getOrderNo() {
-		return orderNo;
-	}
+   public Order()
+   {
+   }
 
-	public void setOrderNo(String orderNo) {
-		this.orderNo = orderNo;
-	}
-	
-	public Set<OrderDetail> getOrderDetail() {
-		return orderDetail;
-	}
+   public int getOrderId()
+   {
+      return this.orderId;
+   }
 
-	public void setOrderDetail(Set<OrderDetail> orderDetail) {
-		this.orderDetail = orderDetail;
-	}
+   public void setOrderId(int orderId)
+   {
+      this.orderId = orderId;
+   }
 
-	public String getShipAddress() {
-		return this.shipAddress;
-	}
+   public String getOrderNo()
+   {
+      return orderNo;
+   }
 
-	public void setShipAddress(String shipAddress) {
-		this.shipAddress = shipAddress;
-	}
+   public void setOrderNo(String orderNo)
+   {
+      this.orderNo = orderNo;
+   }
 
-	public String getShipCity() {
-		return this.shipCity;
-	}
+   public Set<OrderDetail> getOrderDetail()
+   {
+      return orderDetail;
+   }
 
-	public void setShipCity(String shipCity) {
-		this.shipCity = shipCity;
-	}
+   public void setOrderDetail(Set<OrderDetail> orderDetail)
+   {
+      this.orderDetail = orderDetail;
+   }
 
-	public String getShipCountry() {
-		return this.shipCountry;
-	}
+   public String getShipAddress()
+   {
+      return this.shipAddress;
+   }
 
-	public void setShipCountry(String shipCountry) {
-		this.shipCountry = shipCountry;
-	}
+   public void setShipAddress(String shipAddress)
+   {
+      this.shipAddress = shipAddress;
+   }
 
-	public String getShipEmail() {
-		return this.shipEmail;
-	}
+   public String getShipCity()
+   {
+      return this.shipCity;
+   }
 
-	public void setShipEmail(String shipEmail) {
-		this.shipEmail = shipEmail;
-	}
+   public void setShipCity(String shipCity)
+   {
+      this.shipCity = shipCity;
+   }
 
-	public String getShipName() {
-		return this.shipName;
-	}
+   public String getShipCountry()
+   {
+      return this.shipCountry;
+   }
 
-	public void setShipName(String shipName) {
-		this.shipName = shipName;
-	}
+   public void setShipCountry(String shipCountry)
+   {
+      this.shipCountry = shipCountry;
+   }
 
-	public String getShipPhone() {
-		return this.shipPhone;
-	}
+   public String getShipEmail()
+   {
+      return this.shipEmail;
+   }
 
-	public void setShipPhone(String shipPhone) {
-		this.shipPhone = shipPhone;
-	}
+   public void setShipEmail(String shipEmail)
+   {
+      this.shipEmail = shipEmail;
+   }
 
-	public String getShipPostalCode() {
-		return this.shipPostalCode;
-	}
+   public String getShipName()
+   {
+      return this.shipName;
+   }
 
-	public void setShipPostalCode(String shipPostalCode) {
-		this.shipPostalCode = shipPostalCode;
-	}
+   public void setShipName(String shipName)
+   {
+      this.shipName = shipName;
+   }
 
-	public String getShipState() {
-		return this.shipState;
-	}
+   public String getShipPhone()
+   {
+      return this.shipPhone;
+   }
 
-	public void setShipState(String shipState) {
-		this.shipState = shipState;
-	}
+   public void setShipPhone(String shipPhone)
+   {
+      this.shipPhone = shipPhone;
+   }
 
-	public Timestamp getShippingDate() {
-		return this.shippingDate;
-	}
+   public String getShipPostalCode()
+   {
+      return this.shipPostalCode;
+   }
 
-	public void setShippingDate(Timestamp shippingDate) {
-		this.shippingDate = shippingDate;
-	}
+   public void setShipPostalCode(String shipPostalCode)
+   {
+      this.shipPostalCode = shipPostalCode;
+   }
 
-	public User getUser() {
-		return this.user;
-	}
+   public String getShipState()
+   {
+      return this.shipState;
+   }
 
-	public void setUser(User user) {
-		this.user = user;
-	}
+   public void setShipState(String shipState)
+   {
+      this.shipState = shipState;
+   }
+
+   public Timestamp getShippingDate()
+   {
+      return this.shippingDate;
+   }
+
+   public void setShippingDate(Timestamp shippingDate)
+   {
+      this.shippingDate = shippingDate;
+   }
+
+   public User getUser()
+   {
+      return this.user;
+   }
+
+   public void setUser(User user)
+   {
+      this.user = user;
+   }
 
 }

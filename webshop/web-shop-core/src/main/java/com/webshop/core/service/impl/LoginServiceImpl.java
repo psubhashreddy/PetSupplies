@@ -16,26 +16,25 @@ import com.webshop.core.service.LoginService;
  * @date 2nd June 2015
  */
 @Stateless
-public class LoginServiceImpl implements LoginService {
+public class LoginServiceImpl implements LoginService
+{
 
-	@Inject
-	private LoginDAO loginDAO;
+   @Inject
+   private LoginDAO loginDAO;
 
-	@Inject
-	private transient Logger logger;
+   @Inject
+   private transient Logger logger;
 
-	/**
-	 * This method is for validating the user login (non-Javadoc)
-	 * 
-	 * @see com.webshop.core.service.LoginService#validateLogin(java.lang.String,
-	 *      java.lang.String)
-	 * @param String
-	 *            , String
-	 * @return User
-	 */
-	public User validateLogin(String userName, String password, String roleId) {
-		logger.info("**** In validateLogin in ServiceImpl ****");
-		return loginDAO.validateLogin(userName, password,
-				Integer.valueOf(roleId));
-	}
+   /**
+    * This method is for validating the user login (non-Javadoc)
+    * 
+    * @see com.webshop.core.service.LoginService#validateLogin(java.lang.String, java.lang.String)
+    * @param String , String
+    * @return User
+    */
+   public User validateLogin(String userName, String password, String roleId)
+   {
+      logger.info("**** In validateLogin in ServiceImpl ****");
+      return loginDAO.validateLogin(userName, password, Integer.valueOf(roleId));
+   }
 }

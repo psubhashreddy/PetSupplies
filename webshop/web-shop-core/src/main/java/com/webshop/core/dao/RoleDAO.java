@@ -13,24 +13,25 @@ import com.webshop.core.entity.Role;
  * @author speddyre
  * @date 3rd June 2015
  */
-public interface RoleDAO {
+public interface RoleDAO
+{
 
-	String createRole(Role role);
+   String createRole(Role role);
 
-	boolean deleteRole(int role);
+   boolean deleteRole(int role);
 
-	boolean updateRole(Role role);
+   boolean updateRole(Role role);
 
-	List<Role> getRoles();
+   List<Role> getRoles();
 
-	List<Role> getRolesByCriteria(Role role);
+   List<Role> getRolesByCriteria(Role role);
 
-	Role getRoleByRoleName(String roleName);
+   Role getRoleByRoleName(String roleName);
 
-	List<Role> getRoleByRoleDescription(String roleDesc);
+   List<Role> getRoleByRoleDescription(String roleDesc);
 
-	Role getUserRole();
+   Role getUserRole();
 
-	Role getRoleByRoleId(int roleId);
+   Role getRoleByRoleId(int roleId);
 
 }

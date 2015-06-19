@@ -12,16 +12,16 @@ import com.webshop.core.entity.Product;
 /**
  * @author speddyre
  * @dated 12th June 2015
- *
  */
-public interface ShoppingDAO {
+public interface ShoppingDAO
+{
 
-	List<Product> searchProducts(int categoryId, String productDesc);
+   List<Product> searchProducts(int categoryId, String productDesc);
 
-	boolean createOrder(Order order);
+   boolean createOrder(Order order);
 
-	Order searchOrderByOrderNo(String orderNo);
+   Order searchOrderByOrderNo(String orderNo);
 
-	List<OrderDetail> searchOrderDetailsByOrderNo(String orderNo);
-	
+   List<OrderDetail> searchOrderDetailsByOrderNo(String orderNo);
+
 }

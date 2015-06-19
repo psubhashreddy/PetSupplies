@@ -13,18 +13,19 @@ import com.webshop.core.entity.Product;
  * @author speddyre
  * @date 3rd June 2015
  */
-public interface ProductService {
+public interface ProductService
+{
 
-	String createProduct(Product product);
+   String createProduct(Product product);
 
-	boolean deleteProduct(int product);
+   boolean deleteProduct(int product);
 
-	boolean updateProduct(Product product);
+   boolean updateProduct(Product product);
 
-	List<Product> getProductList();
+   List<Product> getProductList();
 
-	Product getProductbyProductId(int productId);
+   Product getProductbyProductId(int productId);
 
-	List<Product> searchProductsByCriteria(Product product);
+   List<Product> searchProductsByCriteria(Product product);
 
 }

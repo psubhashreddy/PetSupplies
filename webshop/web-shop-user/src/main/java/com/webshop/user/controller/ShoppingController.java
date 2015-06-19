@@ -291,6 +291,8 @@ public class ShoppingController
       if (StringUtils.isNotEmpty(orderNo))
       {
          this.orderVO = constructOrderVO(shoppingService.searchOrderByOrderNo(orderNo));
+      }else{
+         this.orderVO = new OrderVO();
       }
       return Constants.SEARCH_MY_ORDER;
    }

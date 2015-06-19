@@ -8,8 +8,9 @@ import com.webshop.core.entity.User;
  * @author speddyre
  * @date 2nd June 2015
  */
-public interface LoginService {
+public interface LoginService
+{
 
-	User validateLogin(String userName, String password, String roleId);
+   User validateLogin(String userName, String password, String roleId);
 
 }

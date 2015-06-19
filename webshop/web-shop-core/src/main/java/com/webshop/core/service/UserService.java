@@ -10,17 +10,18 @@ import com.webshop.core.entity.User;
  * @author speddyre
  * @date 2nd June 2015
  */
-public interface UserService {
+public interface UserService
+{
 
-	String createUser(User user);
+   String createUser(User user);
 
-	boolean deleteUser(int userId);
+   boolean deleteUser(int userId);
 
-	boolean updateUser(User user);
+   boolean updateUser(User user);
 
-	List<User> getUserList();
+   List<User> getUserList();
 
-	User searchUserByUserId(int userId);
+   User searchUserByUserId(int userId);
 
-	List<User> searchUsersByCriteria(User user);
+   List<User> searchUsersByCriteria(User user);
 }

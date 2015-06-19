@@ -7,9 +7,6 @@ import java.sql.Timestamp;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
-import java.util.logging.Logger;
-
-import javax.inject.Inject;
 
 /**
  * This is a util class for date converter from one type to other

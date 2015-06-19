@@ -13,29 +13,30 @@ import com.webshop.core.entity.Product;
  * @author speddyre
  * @date 3rd June 2015
  */
-public interface ProductDAO {
+public interface ProductDAO
+{
 
-	String createProduct(Product product);
+   String createProduct(Product product);
 
-	boolean deleteProduct(Product product);
+   boolean deleteProduct(Product product);
 
-	boolean updateProduct(Product product);
+   boolean updateProduct(Product product);
 
-	List<Product> getProductList();
+   List<Product> getProductList();
 
-	Product getProductbyProductId(int productId);
+   Product getProductbyProductId(int productId);
 
-	Product getProductbyProductCode(String productCode);
+   Product getProductbyProductCode(String productCode);
 
-	Product getProductByProductName(String productName);
+   Product getProductByProductName(String productName);
 
-	List<Product> getProductByDescription(String productDescription);
+   List<Product> getProductByDescription(String productDescription);
 
-	List<Product> getProductByPrice(double productPrice);
+   List<Product> getProductByPrice(double productPrice);
 
-	List<Product> getProductByCategoryId(long categoryId);
+   List<Product> getProductByCategoryId(long categoryId);
 
-	List<Product> getProductByOrderId(long orderId);
+   List<Product> getProductByOrderId(long orderId);
 
-	List<Product> searchProductsByCriteria(Product product);
+   List<Product> searchProductsByCriteria(Product product);
 }

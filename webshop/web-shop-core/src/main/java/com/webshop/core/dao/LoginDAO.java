@@ -8,8 +8,9 @@ import com.webshop.core.entity.User;
  * @author speddyre
  * @date 2nd June 2015
  */
-public interface LoginDAO {
+public interface LoginDAO
+{
 
-	User validateLogin(String userName, String password, int roleId);
+   User validateLogin(String userName, String password, int roleId);
 
 }
