@@ -45,6 +45,7 @@
     
 	<dependencies>
 	
+		<!-- Used for  making UI look and feel good and rich-->
 		<dependency>
             <groupId>org.primefaces</groupId>
             <artifactId>primefaces</artifactId>
